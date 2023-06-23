@@ -35,8 +35,11 @@
             android:id="@+id/buttonC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:backgroundTint="@color/redDark"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:backgroundTint="@color/red"
             android:text="C"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -47,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/buttonC"
-            android:backgroundTint="@color/redDark"
+            android:backgroundTint="@color/red"
             android:text="⌫" />
 
         <Button
@@ -216,7 +219,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/buttonMultiply"
-            android:layout_margin="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:layout_toEndOf="@+id/buttonPlus"
             android:hapticFeedbackEnabled="true"
             android:text="="
