@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginTop="36dp"
-            android:text="111"
+            android:text=""
             android:textSize="40sp" />
 
     </RelativeLayout>
@@ -35,8 +35,12 @@
             android:id="@+id/buttonC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:backgroundTint="@color/redDark"
+            android:onClick="onClickC"
             android:text="C"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -48,6 +52,7 @@
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/buttonC"
             android:backgroundTint="@color/redDark"
+            android:onClick="onClickBack"
             android:text="⌫" />
 
         <Button
@@ -56,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/buttonC"
             android:layout_margin="4dp"
+            android:onClick="onClick7"
             android:text="7"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -67,6 +73,7 @@
             android:layout_below="@+id/buttonC"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button7"
+            android:onClick="onClick8"
             android:text="8"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -78,6 +85,7 @@
             android:layout_below="@+id/buttonC"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button8"
+            android:onClick="onClick9"
             android:text="9"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -89,6 +97,7 @@
             android:layout_below="@+id/buttonBack"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button9"
+            android:onClick="onClickDot"
             android:text="."
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -99,6 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/button7"
             android:layout_margin="4dp"
+            android:onClick="onClick4"
             android:text="4"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -110,6 +120,7 @@
             android:layout_below="@+id/button8"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button4"
+            android:onClick="onClick5"
             android:text="5"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -121,6 +132,7 @@
             android:layout_below="@+id/button9"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button5"
+            android:onClick="onClick6"
             android:text="6"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -132,6 +144,7 @@
             android:layout_below="@+id/buttonDot"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button6"
+            android:onClick="onClickDivide"
             android:text="÷"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -142,6 +155,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/button4"
             android:layout_margin="4dp"
+            android:onClick="onClick1"
             android:text="1"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -153,6 +167,7 @@
             android:layout_below="@+id/button5"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button1"
+            android:onClick="onClick2"
             android:text="2"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -164,6 +179,7 @@
             android:layout_below="@+id/button6"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button2"
+            android:onClick="onClick3"
             android:text="3"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -175,6 +191,7 @@
             android:layout_below="@+id/buttonDivide"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button3"
+            android:onClick="onClickMultiply"
             android:text="×"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -184,7 +201,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button1"
-            android:layout_margin="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:onClick="onClick0"
             android:text="0"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -196,6 +217,7 @@
             android:layout_below="@+id/button2"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button0"
+            android:onClick="onClickMinus"
             android:text="-"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -207,6 +229,7 @@
             android:layout_below="@+id/button3"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/buttonMinus"
+            android:onClick="onClickPlus"
             android:text="+"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -219,6 +242,7 @@
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/buttonPlus"
             android:hapticFeedbackEnabled="true"
+            android:onClick="onClickEquals"
             android:text="="
             android:textSize="32sp"
             android:textStyle="bold" />
