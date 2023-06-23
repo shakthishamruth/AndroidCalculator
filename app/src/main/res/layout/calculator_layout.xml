@@ -43,18 +43,14 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/buttonMultiply"
+            android:id="@+id/buttonDot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button9"
-            android:text="X"
+            android:text="."
             android:textSize="32sp"
             android:textStyle="bold" />
-
 
         <Button
             android:id="@+id/button4"
@@ -90,16 +86,13 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/buttonMinus"
+            android:id="@+id/buttonDivide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonMultiply"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_below="@+id/buttonDot"
+            android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button6"
-            android:text="-"
+            android:text="/"
             android:textSize="32sp"
             android:textStyle="bold" />
 
@@ -124,7 +117,6 @@
             android:textSize="32sp"
             android:textStyle="bold" />
 
-
         <Button
             android:id="@+id/button3"
             android:layout_width="wrap_content"
@@ -136,48 +128,46 @@
             android:textSize="32sp"
             android:textStyle="bold" />
 
-
         <Button
-            android:id="@+id/buttonPlus"
+            android:id="@+id/buttonMultiply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonMinus"
+            android:layout_below="@+id/buttonDivide"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button3"
-            android:text="+"
+            android:text="X"
             android:textSize="32sp"
             android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/buttonDash"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/button1"
-            android:layout_margin="4dp"
-            android:text="_"
-            android:textSize="32sp"
-            android:textStyle="bold" />
-
 
         <Button
             android:id="@+id/button0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/button2"
+            android:layout_below="@+id/button1"
             android:layout_margin="4dp"
-            android:layout_toEndOf="@+id/buttonDash"
             android:text="0"
             android:textSize="32sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/buttonDot"
+            android:id="@+id/buttonMinus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button2"
+            android:layout_margin="4dp"
+            android:layout_toEndOf="@+id/button0"
+            android:text="-"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonPlus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button3"
             android:layout_margin="4dp"
-            android:layout_toEndOf="@+id/button0"
-            android:text="."
+            android:layout_toEndOf="@+id/buttonMinus"
+            android:text="+"
             android:textSize="32sp"
             android:textStyle="bold" />
 
@@ -185,9 +175,9 @@
             android:id="@+id/buttonEquals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonPlus"
+            android:layout_below="@+id/buttonMultiply"
             android:layout_margin="4dp"
-            android:layout_toEndOf="@+id/buttonDot"
+            android:layout_toEndOf="@+id/buttonPlus"
             android:text="="
             android:textSize="32sp"
             android:textStyle="bold" />
