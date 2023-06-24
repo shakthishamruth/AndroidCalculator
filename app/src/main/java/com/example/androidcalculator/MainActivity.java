@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView expressionTxt;
@@ -24,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickBack(View view) {
+        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+            expressionTxt.setText(sb.toString());
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -78,29 +86,40 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void onClickMinus(View view) {
-        expressionTxt.setText(expressionTxt.getText().toString() + "-");
+        expressionTxt.setText(expressionTxt.getText().toString() + " - ");
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickPlus(View view) {
-        expressionTxt.setText(expressionTxt.getText().toString() + "+");
+        expressionTxt.setText(expressionTxt.getText().toString() + " + ");
     }
 
+    @SuppressLint("SetTextI18n")
     public void onClickEquals(View view) {
+        double sol = EvaluateString.evaluate(expressionTxt.getText().toString());
+        expressionTxt.setText(Double.toString(round(sol, 2)));
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickMultiply(View view) {
-        expressionTxt.setText(expressionTxt.getText().toString() + "*");
+        expressionTxt.setText(expressionTxt.getText().toString() + " * ");
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickDivide(View view) {
-        expressionTxt.setText(expressionTxt.getText().toString() + "/");
+        expressionTxt.setText(expressionTxt.getText().toString() + " / ");
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickDot(View view) {
-        expressionTxt.setText(expressionTxt.getText().toString() + ".");
+        // expressionTxt.setText(expressionTxt.getText().toString() + ".");
     }
 }
