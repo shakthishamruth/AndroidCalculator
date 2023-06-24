@@ -110,12 +110,12 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void onClickMultiply(View view) {
-        expressionTxt.setText(expressionTxt.getText().toString() + " * ");
+        expressionTxt.setText(expressionTxt.getText().toString() + " × ");
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickDivide(View view) {
-        expressionTxt.setText(expressionTxt.getText().toString() + " / ");
+        expressionTxt.setText(expressionTxt.getText().toString() + " ÷ ");
     }
 
     @SuppressLint("SetTextI18n")
