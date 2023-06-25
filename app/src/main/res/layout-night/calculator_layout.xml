@@ -30,15 +30,33 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
+        <Button
+            android:id="@+id/buttonOpenB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:onClick="onClickOpenB"
+            android:text="("
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonClosedB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_toEndOf="@+id/buttonOpenB"
+            android:onClick="onClickClosedB"
+            android:text=")"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/buttonC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_margin="4dp"
+            android:layout_toEndOf="@+id/buttonClosedB"
             android:backgroundTint="@color/red"
             android:onClick="onClickC"
             android:text="C"
@@ -53,13 +71,15 @@
             android:layout_toEndOf="@+id/buttonC"
             android:backgroundTint="@color/red"
             android:onClick="onClickBack"
-            android:text="⌫" />
+            android:text="⌫"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/button7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonC"
+            android:layout_below="@+id/buttonOpenB"
             android:layout_margin="4dp"
             android:onClick="onClick7"
             android:text="7"
@@ -70,7 +90,7 @@
             android:id="@+id/button8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonC"
+            android:layout_below="@+id/buttonClosedB"
             android:layout_margin="4dp"
             android:layout_toEndOf="@+id/button7"
             android:onClick="onClick8"
@@ -201,10 +221,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button1"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_margin="4dp"
             android:onClick="onClick0"
             android:text="0"
             android:textSize="32sp"
