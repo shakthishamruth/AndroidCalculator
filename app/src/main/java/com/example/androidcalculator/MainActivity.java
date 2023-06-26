@@ -119,10 +119,10 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void onClickPlus(View view) {
-        if (operatorUse) {
+        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
+        if (operatorUse && sb.length() > 0) {
             expressionTxt.setText(expressionTxt.getText().toString() + "+");
         } else {
-            StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
             if (sb.length() > 0) {
                 Back();
                 expressionTxt.setText(expressionTxt.getText().toString() + "+");
@@ -153,29 +153,35 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void onClickMultiply(View view) {
-        if (operatorUse) {
+        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
+        if (operatorUse && sb.length() > 0) {
             expressionTxt.setText(expressionTxt.getText().toString() + "×");
         } else {
-            Back();
-            expressionTxt.setText(expressionTxt.getText().toString() + "×");
+            if (sb.length() > 0) {
+                Back();
+                expressionTxt.setText(expressionTxt.getText().toString() + "×");
+            }
         }
         operatorUse = false;
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickDivide(View view) {
-        if (operatorUse) {
+        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
+        if (operatorUse && sb.length() > 0) {
             expressionTxt.setText(expressionTxt.getText().toString() + "÷");
         } else {
-            Back();
-            expressionTxt.setText(expressionTxt.getText().toString() + "÷");
+            if (sb.length() > 0) {
+                Back();
+                expressionTxt.setText(expressionTxt.getText().toString() + "÷");
+            }
         }
         operatorUse = false;
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickDot(View view) {
-        // expressionTxt.setText(expressionTxt.getText().toString() + ".");
+        expressionTxt.setText(expressionTxt.getText().toString() + ".");
     }
 
     @SuppressLint("SetTextI18n")

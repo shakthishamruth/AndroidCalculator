@@ -7,7 +7,7 @@ import java.util.Stack;
    are separated by space.
 */
 
-// https://www.geeksforgeeks.org/expression-evaluation/
+// https://www.geeksforgeeks.org/expression-evaluation/ (Made some changes)
 
 public class EvaluateString {
     public static double evaluate(String expression) {
@@ -34,6 +34,11 @@ public class EvaluateString {
                 // digits in number
                 while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9')
                     sbuf.append(tokens[i++]);
+                if (i < tokens.length && tokens[i] == '.') {
+                    sbuf.append(tokens[i++]);
+                    while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9')
+                        sbuf.append(tokens[i++]);
+                }
                 values.push(Double.parseDouble(sbuf.toString()));
 
                 // right now the i points to
