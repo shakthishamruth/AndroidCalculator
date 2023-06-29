@@ -17,18 +17,20 @@ public class MainActivity extends AppCompatActivity {
 
     private Boolean operatorUse;
 
+    private int bracketCount = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calculator_layout);
         operatorUse = false;
-
         expressionTxt = findViewById(R.id.expressionTxt);
     }
 
     public void onClickC(View view) {
         expressionTxt.setText("");
         operatorUse = false;
+        bracketCount = 0;
     }
 
     public void onClickBack(View view) {
@@ -36,10 +38,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Back() {
-        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
-        if (sb.length() > 0) {
-            sb.deleteCharAt(sb.length() - 1);
-            expressionTxt.setText(sb.toString());
+        try {
+            StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
+            if (sb.length() > 0) {
+                if (sb.charAt(sb.length() - 1) == '(') {
+                    bracketCount--;
+                    operatorUse = sb.charAt(sb.length() - 2) >= '0' && sb.charAt(sb.length() - 2) <= '9';
+                } else if (sb.charAt(sb.length() - 1) == ')') {
+                    bracketCount++;
+                } else if (sb.charAt(sb.length() - 1) == '+' || sb.charAt(sb.length() - 1) == '-' || sb.charAt(sb.length() - 1) == '×' || sb.charAt(sb.length() - 1) == '÷') {
+                    operatorUse = true;
+                } else if (sb.charAt(sb.length() - 1) >= '0' && sb.charAt(sb.length() - 1) <= '9') {
+                    if (sb.charAt(sb.length() - 2) >= '0' && sb.charAt(sb.length() - 2) <= '9') {
+                        operatorUse = true;
+                    } else if (sb.charAt(sb.length() - 2) == '(' || sb.charAt(sb.length() - 2) == ')') {
+                        operatorUse = false;
+                    } else if (sb.charAt(sb.length() - 2) == '+' || sb.charAt(sb.length() - 2) == '-' || sb.charAt(sb.length() - 2) == '×' || sb.charAt(sb.length() - 2) == '÷') {
+                        operatorUse = false;
+                    }
+                }
+                sb.deleteCharAt(sb.length() - 1);
+                expressionTxt.setText(sb.toString());
+            }
+        } catch (Exception e) {
+            expressionTxt.setText("");
         }
     }
 
@@ -104,41 +126,51 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    public void onClickMinus(View view) {
+    public void addOperator(String o) {
+        // expressionTxt.setText(expressionTxt.getText().toString() + o);
         StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
-        if (operatorUse && sb.length() > 0) {
-            expressionTxt.setText(expressionTxt.getText().toString() + "-");
-        } else {
-            if (sb.length() > 0) {
-                Back();
-                expressionTxt.setText(expressionTxt.getText().toString() + "-");
+        if (sb.length() > 0) {
+            int len = sb.length() - 1;
+            if (sb.charAt(len) == ')') {
+                expressionTxt.setText(expressionTxt.getText().toString() + o);
+            } else if (sb.charAt(len) >= '0' && sb.charAt(len) <= '9') {
+                expressionTxt.setText(expressionTxt.getText().toString() + o);
+            } else if (sb.charAt(len) == '.') {
+                expressionTxt.setText(expressionTxt.getText().toString() + "0" + o);
+            } else {
+                if (sb.charAt(len) != '(') {
+                    Back();
+                    expressionTxt.setText(expressionTxt.getText().toString() + o);
+                }
             }
         }
         operatorUse = false;
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void onClickMinus(View view) {
+        addOperator("-");
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickPlus(View view) {
-        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
-        if (operatorUse && sb.length() > 0) {
-            expressionTxt.setText(expressionTxt.getText().toString() + "+");
-        } else {
-            if (sb.length() > 0) {
-                Back();
-                expressionTxt.setText(expressionTxt.getText().toString() + "+");
-            }
-        }
-        operatorUse = false;
+        addOperator("+");
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickEquals(View view) {
-        if (operatorUse) {
+        if (operatorUse && bracketCount == 0) {
             try {
                 double sol = EvaluateString.evaluate(expressionTxt.getText().toString());
-                expressionTxt.setText(Double.toString(round(sol, 2)));
+                expressionTxt.setText(Double.toString(round(sol, 4)));
             } catch (Exception e) {
                 Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            if (bracketCount != 0) {
+                Toast.makeText(this, "Complete All Brackets", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Not Allowed", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -153,44 +185,63 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void onClickMultiply(View view) {
-        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
-        if (operatorUse && sb.length() > 0) {
-            expressionTxt.setText(expressionTxt.getText().toString() + "×");
-        } else {
-            if (sb.length() > 0) {
-                Back();
-                expressionTxt.setText(expressionTxt.getText().toString() + "×");
-            }
-        }
-        operatorUse = false;
+        addOperator("×");
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickDivide(View view) {
-        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
-        if (operatorUse && sb.length() > 0) {
-            expressionTxt.setText(expressionTxt.getText().toString() + "÷");
-        } else {
-            if (sb.length() > 0) {
-                Back();
-                expressionTxt.setText(expressionTxt.getText().toString() + "÷");
-            }
-        }
-        operatorUse = false;
+        addOperator("÷");
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickDot(View view) {
-        expressionTxt.setText(expressionTxt.getText().toString() + ".");
+        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
+        if (operatorUse && sb.length() > 0) {
+            char[] tokens = expressionTxt.getText().toString().toCharArray();
+            int count = 0;
+            boolean isThere = false;
+            for (int i = sb.length() - 1; i >= 0; i--) {
+                if (tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '×' || tokens[i] == '÷' || tokens[i] == '(' || tokens[i] == ')') {
+                    count = i;
+                    break;
+                }
+            }
+            for (int i = sb.length() - 1; i >= count; i--) {
+                if (tokens[i] == '.') {
+                    isThere = true;
+                    break;
+                }
+            }
+            if (!isThere) {
+                expressionTxt.setText(expressionTxt.getText().toString() + ".");
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickOpenB(View view) {
-        expressionTxt.setText(expressionTxt.getText().toString() + "(");
+        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
+        int len = sb.length() - 1;
+        if (sb.length() > 0) {
+            if ((sb.charAt(len) >= '0' && sb.charAt(len) <= '9') || sb.charAt(len) == ')') {
+                expressionTxt.setText(expressionTxt.getText().toString() + "×(");
+            } else {
+                expressionTxt.setText(expressionTxt.getText().toString() + "(");
+            }
+            bracketCount++;
+        } else if (sb.length() == 0) {
+            expressionTxt.setText(expressionTxt.getText().toString() + "(");
+            bracketCount++;
+        }
     }
 
     @SuppressLint("SetTextI18n")
     public void onClickClosedB(View view) {
-        expressionTxt.setText(expressionTxt.getText().toString() + ")");
+        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
+        int len = sb.length() - 1;
+        if ((bracketCount > 0 && sb.charAt(len) >= '0' && sb.charAt(len) <= '9') || (bracketCount > 0 && sb.charAt(len) == ')')) {
+            expressionTxt.setText(expressionTxt.getText().toString() + ")");
+            bracketCount--;
+        }
     }
 }
