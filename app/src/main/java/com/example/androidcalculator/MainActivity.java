@@ -137,6 +137,12 @@ public class MainActivity extends AppCompatActivity {
                 expressionTxt.setText(expressionTxt.getText().toString() + o);
             } else if (sb.charAt(len) == '.') {
                 expressionTxt.setText(expressionTxt.getText().toString() + "0" + o);
+            } else if (sb.charAt(len) == '-') {
+                if (sb.charAt(len - 1) == '×' || sb.charAt(len - 1) == '÷') {
+                    Back();
+                }
+                Back();
+                expressionTxt.setText(expressionTxt.getText().toString() + o);
             } else {
                 if (sb.charAt(len) != '(') {
                     Back();
@@ -149,7 +155,26 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void onClickMinus(View view) {
-        addOperator("-");
+        String o = "-";
+        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
+        if (sb.length() > 0) {
+            int len = sb.length() - 1;
+            if (sb.charAt(len) == ')') {
+                expressionTxt.setText(expressionTxt.getText().toString() + o);
+            } else if (sb.charAt(len) >= '0' && sb.charAt(len) <= '9') {
+                expressionTxt.setText(expressionTxt.getText().toString() + o);
+            } else if (sb.charAt(len) == '.') {
+                expressionTxt.setText(expressionTxt.getText().toString() + "0" + o);
+            } else if (sb.charAt(len) == '×' || sb.charAt(len) == '÷') {
+                expressionTxt.setText(expressionTxt.getText().toString() + o);
+            } else {
+                if (sb.charAt(len) != '(' && sb.charAt(len) != '-' || sb.charAt(len) != '+') {
+                    Back();
+                    expressionTxt.setText(expressionTxt.getText().toString() + o);
+                }
+            }
+        }
+        operatorUse = false;
     }
 
     @SuppressLint("SetTextI18n")
@@ -159,7 +184,8 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void onClickEquals(View view) {
-        if (operatorUse && bracketCount == 0) {
+        StringBuilder sb = new StringBuilder(expressionTxt.getText().toString());
+        if (sb.length() > 0 && operatorUse && bracketCount == 0) {
             try {
                 double sol = EvaluateString.evaluate(expressionTxt.getText().toString());
                 expressionTxt.setText(Double.toString(round(sol, 4)));
@@ -169,6 +195,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             if (bracketCount != 0) {
                 Toast.makeText(this, "Complete All Brackets", Toast.LENGTH_SHORT).show();
+            } else if (sb.length() == 0) {
+                Toast.makeText(this, "Nothing to Evaluate", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Not Allowed", Toast.LENGTH_SHORT).show();
             }

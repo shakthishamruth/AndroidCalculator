@@ -53,10 +53,12 @@ public class EvaluateString {
 
             // Current token is an opening brace,
             // push it to 'ops'
-            else if (tokens[i] == '(') ops.push(tokens[i]);
+            else if (tokens[i] == '(') {
+                ops.push(tokens[i]);
+            }
 
-                // Closing brace encountered,
-                // solve entire brace
+            // Closing brace encountered,
+            // solve entire brace
             else if (tokens[i] == ')') {
                 while (ops.peek() != '(')
                     values.push(applyOp(ops.pop(), values.pop(), values.pop()));
@@ -65,16 +67,55 @@ public class EvaluateString {
 
             // Current token is an operator.
             else if (tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '×' || tokens[i] == '÷') {
-                // While top of 'ops' has same
-                // or greater precedence to current
-                // token, which is an operator.
-                // Apply operator on top of 'ops'
-                // to top two elements in values stack
-                while (!ops.empty() && hasPrecedence(tokens[i], ops.peek()))
-                    values.push(applyOp(ops.pop(), values.pop(), values.pop()));
+                if (tokens[i] == '-') {
+                    if (tokens[i - 1] == '+' || tokens[i - 1] == '-' || tokens[i - 1] == '×' || tokens[i - 1] == '÷') {
+                        if (tokens[i + 1] == '(') {
+                            StringBuilder sb = new StringBuilder();
+                            i = i + 2;
+                            int count = 0;
+                            while (tokens[i] != ')' || count != 0) {
+                                if (tokens[i] == '(') {
+                                    count++;
+                                }
+                                if (tokens[i] == ')') {
+                                    count--;
+                                }
+                                sb.append(tokens[i]);
+                                i++;
+                            }
+                            values.push(evaluate(sb.toString()) * -1);
+                        } else {
+                            StringBuilder sbuf = new StringBuilder();
+                            sbuf.append(tokens[i++]);
+                            while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9')
+                                sbuf.append(tokens[i++]);
+                            if (i < tokens.length && tokens[i] == '.') {
+                                sbuf.append(tokens[i++]);
+                                while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9')
+                                    sbuf.append(tokens[i++]);
+                            }
+                            values.push(Double.parseDouble(sbuf.toString()));
+                            i--;
+                        }
+                    } else {
+                        // While top of 'ops' has same
+                        // or greater precedence to current
+                        // token, which is an operator.
+                        // Apply operator on top of 'ops'
+                        // to top two elements in values stack
+                        while (!ops.empty() && hasPrecedence(tokens[i], ops.peek()))
+                            values.push(applyOp(ops.pop(), values.pop(), values.pop()));
 
-                // Push current token to 'ops'.
-                ops.push(tokens[i]);
+                        // Push current token to 'ops'.
+                        ops.push(tokens[i]);
+                    }
+                } else {
+                    while (!ops.empty() && hasPrecedence(tokens[i], ops.peek()))
+                        values.push(applyOp(ops.pop(), values.pop(), values.pop()));
+
+                    // Push current token to 'ops'.
+                    ops.push(tokens[i]);
+                }
             }
         }
 
