@@ -161,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
             int len = sb.length() - 1;
             if (sb.charAt(len) == ')') {
                 expressionTxt.setText(expressionTxt.getText().toString() + o);
+            } else if (sb.charAt(len) == '(') {
+                expressionTxt.setText(expressionTxt.getText().toString() + "0" + o);
             } else if (sb.charAt(len) >= '0' && sb.charAt(len) <= '9') {
                 expressionTxt.setText(expressionTxt.getText().toString() + o);
             } else if (sb.charAt(len) == '.') {
@@ -168,11 +170,13 @@ public class MainActivity extends AppCompatActivity {
             } else if (sb.charAt(len) == '×' || sb.charAt(len) == '÷') {
                 expressionTxt.setText(expressionTxt.getText().toString() + o);
             } else {
-                if (sb.charAt(len) != '(' && sb.charAt(len) != '-' || sb.charAt(len) != '+') {
+                if (sb.charAt(len) != '-' || sb.charAt(len) != '+') {
                     Back();
                     expressionTxt.setText(expressionTxt.getText().toString() + o);
                 }
             }
+        } else if (sb.length() == 0) {
+            expressionTxt.setText(expressionTxt.getText().toString() + "0" + o);
         }
         operatorUse = false;
     }
@@ -253,6 +257,8 @@ public class MainActivity extends AppCompatActivity {
         if (sb.length() > 0) {
             if ((sb.charAt(len) >= '0' && sb.charAt(len) <= '9') || sb.charAt(len) == ')') {
                 expressionTxt.setText(expressionTxt.getText().toString() + "×(");
+            } else if (sb.charAt(len) == '.') {
+                expressionTxt.setText(expressionTxt.getText().toString() + "0×(");
             } else {
                 expressionTxt.setText(expressionTxt.getText().toString() + "(");
             }
